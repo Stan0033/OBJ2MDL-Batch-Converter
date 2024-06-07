@@ -1,0 +1,8 @@
+﻿<Window x:Class="obj2mdl_batch_converter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Title="OBJ2MDL Batch converter" Height="350" Width="350">
+    <Label Name="Man" Height="300" Width="300" HorizontalContentAlignment="Center"  AllowDrop="True" Drop="Man_Drop"  VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="2">Drop obj files here</Label>
+</Window>
