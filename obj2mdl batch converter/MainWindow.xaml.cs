@@ -35,7 +35,7 @@ namespace obj2mdl_batch_converter
                         }
                     }
 
-                    if (files.Length > 0)
+                    if (objFilePaths.Count > 0)
                     {
                         foreach (string path in objFilePaths)
                         {

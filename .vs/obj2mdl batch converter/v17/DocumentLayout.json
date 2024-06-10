@@ -1,7 +1,16 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Projects\\OBJ2MDL-Batch-Converter\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A53D160F-9006-4A04-9392-36A307C31188}|obj2mdl batch converter\\obj2mdl batch converter.csproj|c:\\projects\\obj2mdl-batch-converter\\obj2mdl batch converter\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A53D160F-9006-4A04-9392-36A307C31188}|obj2mdl batch converter\\obj2mdl batch converter.csproj|solutionrelative:obj2mdl batch converter\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A53D160F-9006-4A04-9392-36A307C31188}|obj2mdl batch converter\\obj2mdl batch converter.csproj|C:\\Projects\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A53D160F-9006-4A04-9392-36A307C31188}|obj2mdl batch converter\\obj2mdl batch converter.csproj|solutionrelative:obj2mdl batch converter\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +18,35 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Projects\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "obj2mdl batch converter\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Projects\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\MainWindow.xaml.cs",
+              "RelativeToolTip": "obj2mdl batch converter\\MainWindow.xaml.cs",
+              "ViewState": "AQIAAOMAAAAAAAAAAAAUwE4BAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-10T03:07:50.166Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Projects\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "obj2mdl batch converter\\MainWindow.xaml",
+              "ToolTip": "C:\\Projects\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\MainWindow.xaml",
+              "RelativeToolTip": "obj2mdl batch converter\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-06-10T03:07:47.114Z"
             }
           ]
         }
