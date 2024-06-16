@@ -310,19 +310,20 @@ Anim ""Death"" {
             if (!string.IsNullOrEmpty(input))
             {
                 string[] parts = input.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                string formattedString = "{ ";
+                StringBuilder sb = new StringBuilder();
+                sb.Append( "{ ");
 
                 for (int i = 0; i < parts.Length; i++)
                 {
-                    formattedString += parts[i];
+                    sb.Append(parts[i]);
                     if (i < parts.Length - 1)
                     {
-                        formattedString += ", ";
+                        sb.Append( ", ");
                     }
                 }
 
-                formattedString += " },";
-                return formattedString;
+                sb.Append(" },");
+                return sb.ToString();
             }
             else
             {
