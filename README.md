@@ -2,7 +2,7 @@ This program will convert dropped .obj (wavefront) files onto it, into .mdl mode
 
 Notice:
 1. no matter how much objects you had in your obj file, the outcome will be a single geoset 
-2. do not mess with the .obj file with notepad or similar, please.
+2. do not mess with the .obj file with notepad or similar.
 
 Bonus to converted mdl file:
 - origin ref
