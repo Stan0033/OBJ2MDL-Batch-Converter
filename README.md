@@ -1,4 +1,4 @@
-This program will convert dropped .obj files onto it, into .mdl model for warcraft 3 and put them in the same location.
+This program will convert dropped .obj (wavefront) files onto it, into .mdl model for warcraft 3 and put them in the same location.
 
 Notice:
 1. no matter how much objects you had in your obj file, the outcome will be a single geoset 
