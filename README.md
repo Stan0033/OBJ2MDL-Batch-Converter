@@ -13,4 +13,4 @@ Requires .net 4.5.
 
 Single .exe file.
 
-![alt text](https://i.ibb.co/fdDWJmW/Screenshot-2024-06-07-101319.png)
+![alt text](https://i.ibb.co/CBPrxzN/Screenshot-2024-06-18-052810.png)
