@@ -9,7 +9,7 @@ Bonus to converted mdl file:
 - geoset attached to bone "base", and using material
 - material with layer using texture "Textures\white.blp"
 
-Requires .net 4.5.
+Requires .net 3.5.
 
 Single .exe file.
 
