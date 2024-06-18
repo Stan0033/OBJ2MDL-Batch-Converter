@@ -151,8 +151,8 @@ namespace obj2mdl_batch_converter
 
         private static string WorkFaces()
         {
-            
-            return string.Join(", ", TriangleVertexIndices);
+            string[] stringArray = TriangleVertexIndices.ConvertAll(i => i.ToString()).ToArray();
+            return string.Join(", ", stringArray);
         }
 
         public static void Parse(string filename)
