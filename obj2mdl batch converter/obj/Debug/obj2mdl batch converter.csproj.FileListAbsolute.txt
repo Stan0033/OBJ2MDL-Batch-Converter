@@ -40,3 +40,17 @@ C:\Projects\OBJ2MDL-Batch-Converter\obj2mdl batch converter\obj\Debug\obj2mdl ba
 C:\Projects\OBJ2MDL-Batch-Converter\obj2mdl batch converter\obj\Debug\obj2mdl batch converter.csproj.CoreCompileInputs.cache
 C:\Projects\OBJ2MDL-Batch-Converter\obj2mdl batch converter\obj\Debug\obj2mdl batch converter.exe
 C:\Projects\OBJ2MDL-Batch-Converter\obj2mdl batch converter\obj\Debug\obj2mdl batch converter.pdb
+C:\Transfer Folder\Projects\OBJ2MDL-Batch-Converter\obj2mdl batch converter\bin\Debug\obj2mdl batch converter.exe.config
+C:\Transfer Folder\Projects\OBJ2MDL-Batch-Converter\obj2mdl batch converter\bin\Debug\obj2mdl batch converter.exe
+C:\Transfer Folder\Projects\OBJ2MDL-Batch-Converter\obj2mdl batch converter\bin\Debug\obj2mdl batch converter.pdb
+C:\Transfer Folder\Projects\OBJ2MDL-Batch-Converter\obj2mdl batch converter\obj\Debug\obj2mdl batch converter.csproj.AssemblyReference.cache
+C:\Transfer Folder\Projects\OBJ2MDL-Batch-Converter\obj2mdl batch converter\obj\Debug\MainWindow.baml
+C:\Transfer Folder\Projects\OBJ2MDL-Batch-Converter\obj2mdl batch converter\obj\Debug\MainWindow.g.cs
+C:\Transfer Folder\Projects\OBJ2MDL-Batch-Converter\obj2mdl batch converter\obj\Debug\App.g.cs
+C:\Transfer Folder\Projects\OBJ2MDL-Batch-Converter\obj2mdl batch converter\obj\Debug\obj2mdl batch converter_MarkupCompile.cache
+C:\Transfer Folder\Projects\OBJ2MDL-Batch-Converter\obj2mdl batch converter\obj\Debug\obj2mdl batch converter.g.resources
+C:\Transfer Folder\Projects\OBJ2MDL-Batch-Converter\obj2mdl batch converter\obj\Debug\obj2mdl_batch_converter.Properties.Resources.resources
+C:\Transfer Folder\Projects\OBJ2MDL-Batch-Converter\obj2mdl batch converter\obj\Debug\obj2mdl batch converter.csproj.GenerateResource.cache
+C:\Transfer Folder\Projects\OBJ2MDL-Batch-Converter\obj2mdl batch converter\obj\Debug\obj2mdl batch converter.csproj.CoreCompileInputs.cache
+C:\Transfer Folder\Projects\OBJ2MDL-Batch-Converter\obj2mdl batch converter\obj\Debug\obj2mdl batch converter.exe
+C:\Transfer Folder\Projects\OBJ2MDL-Batch-Converter\obj2mdl batch converter\obj\Debug\obj2mdl batch converter.pdb

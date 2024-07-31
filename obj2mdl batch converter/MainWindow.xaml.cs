@@ -5,19 +5,56 @@ using System.IO;
 using Path = System.IO.Path;
 using System.Text;
 using System.Linq;
-
 namespace obj2mdl_batch_converter
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    /*
+    OBJ2MDL Batch Converter
+
+    Version: 1.0.0
+    Author: Stanislav Vladev (aka Stan0033)
+    Release Date: June 2024
+    Description:
+
+    OBJ2MDL Batch Converter is a tool for converting OBJ files
+    to MDL format. It is designed for batch processing, making
+    it easy to handle multiple files efficiently.
+    Notice:
+
+    Regardless of object count in the OBJ file, the output
+    will be a single geoset.
+    Do not edit the OBJ file using Notepad or similar editors.
+    The output geoset will be sideways due to differences
+    between standard 3D coordinates and OpenGL coordinates.
+    You can rotate it post-conversion.
+
+    Bonus Features:
+
+    Origin reference included.
+    Geoset attached to "base" bone, with material applied.
+    Material includes a layer using texture "Textures\white.blp".
+
+    System Requirements:
+
+    .NET Framework 3.5 required.
+    Distributed as a single .exe file.
+
+    Usage:
+
+    This software is free to use for personal and commercial
+    purposes, but modification of the source code is not allowed.
+    License:
+
+    This software is provided "as-is" without any warranty. The
+    author is not liable for any damages resulting from its use.
+    Redistribution is allowed, provided the software is unmodified.
+    
+     */
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
         }
-
         private void Man_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -26,7 +63,6 @@ namespace obj2mdl_batch_converter
                 {
                     string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
                     List<string> objFilePaths = new List<string>();
-
                     foreach (string file in files)
                     {
                         if (System.IO.Path.GetExtension(file).ToLower() == ".obj")
@@ -34,7 +70,6 @@ namespace obj2mdl_batch_converter
                             objFilePaths.Add(file);
                         }
                     }
-
                     if (objFilePaths.Count > 0)
                     {
                         foreach (string path in objFilePaths)
@@ -44,11 +79,9 @@ namespace obj2mdl_batch_converter
                             ObjFileParser.Save(target);
                         }
                     }
-
                 }
             }
         }
-
         public static string ChangeExtension(string filename, string newExtension)
         {
             if (!string.IsNullOrEmpty(filename) && !string.IsNullOrEmpty(newExtension))
@@ -93,7 +126,6 @@ namespace obj2mdl_batch_converter
             stringBuilder.AppendLine($"Vertices {Vertices.Count} {{");
             foreach (string s in Vertices) { stringBuilder.AppendLine(FormatWithCurlyBraces(s)); }
             stringBuilder.AppendLine("}");
-           
             stringBuilder.AppendLine($"Normals {Vertices.Count} {{");
             for (int i = 0; i < Vertices.Count; i++)
             {
@@ -103,7 +135,6 @@ namespace obj2mdl_batch_converter
                     stringBuilder.AppendLine("{ 0, 0, 0 },");
                 }
             }
-           
             stringBuilder.AppendLine("}");
             stringBuilder.AppendLine($"TVertices {Vertices.Count} {{");
             for (int i = 0; i < Vertices.Count; i++)
@@ -116,45 +147,29 @@ namespace obj2mdl_batch_converter
             }
             stringBuilder.AppendLine("}");
             stringBuilder.AppendLine($"VertexGroup {{");
-            for (int i= 0; i < Vertices.Count; i++)
+            for (int i = 0; i < Vertices.Count; i++)
             {
                 stringBuilder.AppendLine("0,");
             }
-
-
-
             stringBuilder.AppendLine("}");
-
             stringBuilder.AppendLine($"Faces 1 {TriangleVertexIndices.Count} {{");
             stringBuilder.AppendLine($"Triangles {{");
             stringBuilder.AppendLine($"{{");
             stringBuilder.AppendLine(WorkFaces());
-         
-
             stringBuilder.AppendLine($"}},\r\n\t\t}}\r\n\t}}\r\n");
-
-
-
-
-
             stringBuilder.AppendLine(@"Groups 1 1 {
 		Matrices { 0 },
 	}");
             stringBuilder.AppendLine("MaterialID 0,");
             stringBuilder.AppendLine("SelectionGroup 0,");
             stringBuilder.AppendLine("}");
-
-
-            
-            return stringBuilder.ToString();    
+            return stringBuilder.ToString();
         }
-
         private static string WorkFaces()
         {
             string[] stringArray = TriangleVertexIndices.ConvertAll(i => i.ToString()).ToArray();
             return string.Join(", ", stringArray);
         }
-
         public static void Parse(string filename)
         {
             if (File.Exists(filename))
@@ -192,7 +207,6 @@ namespace obj2mdl_batch_converter
         }
         public static void TriangulateFaces()
         {
-
             List<int> VertexIndices = new List<int>();
             foreach (var face in Faces)
             {
@@ -221,8 +235,8 @@ namespace obj2mdl_batch_converter
                 if (faceVertices.Length > 4)
                 {
                     List<int> indexes = new List<int>();
-                    foreach (string ngon in faceVertices) { indexes.Add(int.Parse( ngon.Split('/')[0]) -1); }
-                    indexes.OrderBy(x=>x);
+                    foreach (string ngon in faceVertices) { indexes.Add(int.Parse(ngon.Split('/')[0]) - 1); }
+                    indexes.OrderBy(x => x);
                     while (indexes.Count > 2)
                     {
                         TriangleVertexIndices.Add(indexes[0]);
@@ -230,9 +244,8 @@ namespace obj2mdl_batch_converter
                         TriangleVertexIndices.Add(indexes[2]);
                         indexes.RemoveAt(1);
                     }
-
                 }
-                    while (VertexIndices.Count > 2)
+                while (VertexIndices.Count > 2)
                 {
                     TriangleVertexIndices.Add(VertexIndices[0]);
                     TriangleVertexIndices.Add(VertexIndices[1]);
@@ -241,25 +254,18 @@ namespace obj2mdl_batch_converter
                     VertexIndices.RemoveAt(0);
                     VertexIndices.RemoveAt(0);
                 }
-
             }
         }
         public static void Save(string filename)
-
-
         {
-           
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"// Model converted from obj to mdl by OBJ2MDL Batch Converter on {DateTime.Now}");
             sb.AppendLine(MDL_Base);
             sb.AppendLine(Get());
-
             File.WriteAllText(filename, sb.ToString());
-
             Clean();
         }
-
-        private static string MDL_Base = @"
+        private const string MDL_Base = @"
                 Version {
 	FormatVersion 800,
 }
@@ -311,17 +317,15 @@ Anim ""Death"" {
             {
                 string[] parts = input.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 StringBuilder sb = new StringBuilder();
-                sb.Append( "{ ");
-
+                sb.Append("{ ");
                 for (int i = 0; i < parts.Length; i++)
                 {
                     sb.Append(parts[i]);
                     if (i < parts.Length - 1)
                     {
-                        sb.Append( ", ");
+                        sb.Append(", ");
                     }
                 }
-
                 sb.Append(" },");
                 return sb.ToString();
             }
@@ -331,5 +335,4 @@ Anim ""Death"" {
             }
         }
     }
-
 }

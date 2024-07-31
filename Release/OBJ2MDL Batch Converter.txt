@@ -15,4 +15,7 @@ Single .exe file.
 
 code: 
 
+what is obj:
+Wavefront object (.obj) is a widely supported format for storing 3d information about a model. It contains only geometry. Rigging and animation no. It is supported by apps like 3ds max, Maya, Blender, Zbrush, Windows 3D Viewer, Sketchup, AutoCAD, FreeCAD, Meshlab, etc.  
+
 
