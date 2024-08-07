@@ -5,33 +5,29 @@ using System.IO;
 using Path = System.IO.Path;
 using System.Text;
 using System.Linq;
+using System.Text.RegularExpressions;
 namespace obj2mdl_batch_converter
 {
     /*
     OBJ2MDL Batch Converter
 
-    Version: 1.0.0
+    Version: 1.0.1
     Author: Stanislav Vladev (aka Stan0033)
-    Release Date: June 2024
+    Release Date: August 2024
     Description:
 
     OBJ2MDL Batch Converter is a tool for converting OBJ files
-    to MDL format. It is designed for batch processing, making
+    to Warcraft III's MDL format. It is designed for batch processing, making
     it easy to handle multiple files efficiently.
     Notice:
 
-    Regardless of object count in the OBJ file, the output
-    will be a single geoset.
-    Do not edit the OBJ file using Notepad or similar editors.
-    The output geoset will be sideways due to differences
-    between standard 3D coordinates and OpenGL coordinates.
-    You can rotate it post-conversion.
+   1. The output will always be a single geoset regardless of objects count.
+   2. The output geoset might be sideways and with lower scaling but that can be fixed post-conversion.
 
     Bonus Features:
 
-    Origin reference included.
-    Geoset attached to "base" bone, with material applied.
-    Material includes a layer using texture "Textures\white.blp".
+    1. Origin ref  
+    2. Geoset attached to "base" bone, with material with layer using texture "Textures\white.blp".
 
     System Requirements:
 
@@ -48,6 +44,10 @@ namespace obj2mdl_batch_converter
     author is not liable for any damages resulting from its use.
     Redistribution is allowed, provided the software is unmodified.
     
+    changelog:
+    1.0.1:
+    - validating obj file format
+    - datetime not using local format anymore
      */
     public partial class MainWindow : Window
     {
@@ -55,7 +55,7 @@ namespace obj2mdl_batch_converter
         {
             InitializeComponent();
         }
-        private void Man_Drop(object sender, DragEventArgs e)
+        private void OnLabel_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
@@ -67,69 +67,45 @@ namespace obj2mdl_batch_converter
                     {
                         if (System.IO.Path.GetExtension(file).ToLower() == ".obj")
                         {
-                            objFilePaths.Add(file);
+                            if (ObjFileParser.ObjValidator(file) == false) {   continue; }
+                                ObjFileParser.Parse(file);
+                                string targetPath = ChangeExtension(file, "mdl");
+                                ObjFileParser.Save(targetPath);
+                                
                         }
                     }
-                    if (objFilePaths.Count > 0)
-                    {
-                        foreach (string path in objFilePaths)
-                        {
-                            ObjFileParser.Parse(path);
-                            string target = ChangeExtension(path, "mdl");
-                            ObjFileParser.Save(target);
-                        }
-                    }
+                    
                 }
             }
         }
-        public static string ChangeExtension(string filename, string newExtension)
+        private static string ChangeExtension(string filename, string newExtension)
         {
-            if (!string.IsNullOrEmpty(filename) && !string.IsNullOrEmpty(newExtension))
-            {
-                string directory = Path.GetDirectoryName(filename);
-                string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(filename);
-                string newFileName = Path.Combine(directory, $"{fileNameWithoutExtension}.{newExtension}");
-                return newFileName;
-            }
-            else
-            {
-                throw new ArgumentException("Filename or new extension is null or empty.");
-            }
+            if (string.IsNullOrEmpty(filename) || string.IsNullOrEmpty(newExtension))
+            {  throw new ArgumentException("Filename or new extension is null or empty.");  }
+             return Path.Combine(Path.GetDirectoryName(filename), $"{Path.GetFileNameWithoutExtension(filename)}.{newExtension}");
         }
+
     }
     public static class ObjFileParser
     {
-        public static List<string> Vertices { get; private set; }
-        public static List<string> Normals { get; private set; }
-        public static List<string> TextureCoordinates { get; private set; }
-        public static List<string> Faces { get; private set; }
-        public static List<int> TriangleVertexIndices = new List<int>();
-        private static void Clean()
-        {
-            Vertices.Clear();
-            Normals.Clear();
-            TextureCoordinates.Clear();
-            Faces.Clear();
-            TriangleVertexIndices.Clear();
-        }
-        static ObjFileParser()
-        {
-            Vertices = new List<string>();
-            Normals = new List<string>();
-            TextureCoordinates = new List<string>();
-            Faces = new List<string>();
-        }
-        private static string Get()
+        public static List<string> Vertices { get; private set; } = new List<string>();
+        public static List<string> Normals { get; private set; } = new List<string>();
+        public static List<string> TextureCoordinates { get; private set; } = new List<string>();
+        public static List<string> Faces { get; private set; } = new List<string>();
+        public static List<int> TriangleVertexIndices { get; private set; }  = new List<int>();
+        public static void ClearAll()  {  Vertices.Clear(); Normals.Clear(); TextureCoordinates.Clear();  Faces.Clear(); TriangleVertexIndices.Clear();}
+        
+        public static string Get_MDL_String()
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("Geoset {");
             stringBuilder.AppendLine($"Vertices {Vertices.Count} {{");
-            foreach (string s in Vertices) { stringBuilder.AppendLine(FormatWithCurlyBraces(s)); }
+            foreach (string vertex in Vertices) { stringBuilder.AppendLine(FormatWithCurlyBraces(vertex)); }
             stringBuilder.AppendLine("}");
             stringBuilder.AppendLine($"Normals {Vertices.Count} {{");
-            for (int i = 0; i < Vertices.Count; i++)
+            for (int normalIndex = 0; normalIndex < Vertices.Count; normalIndex++)
             {
-                if (i < Normals.Count) { stringBuilder.AppendLine(FormatWithCurlyBraces(Normals[i])); }
+                if (normalIndex < Normals.Count) { stringBuilder.AppendLine(FormatWithCurlyBraces(Normals[normalIndex])); }
                 else
                 {
                     stringBuilder.AppendLine("{ 0, 0, 0 },");
@@ -137,9 +113,9 @@ namespace obj2mdl_batch_converter
             }
             stringBuilder.AppendLine("}");
             stringBuilder.AppendLine($"TVertices {Vertices.Count} {{");
-            for (int i = 0; i < Vertices.Count; i++)
+            for (int tVertexIndex = 0; tVertexIndex < Vertices.Count; tVertexIndex++)
             {
-                if (i < TextureCoordinates.Count) { stringBuilder.AppendLine(FormatWithCurlyBraces(TextureCoordinates[i])); }
+                if (tVertexIndex < TextureCoordinates.Count) { stringBuilder.AppendLine(FormatWithCurlyBraces(TextureCoordinates[tVertexIndex])); }
                 else
                 {
                     stringBuilder.AppendLine("{ 0, 0 },");
@@ -201,11 +177,11 @@ namespace obj2mdl_batch_converter
             }
             else
             {
-                throw new FileNotFoundException("The specified file does not exist.");
+                MessageBox.Show ($"The specified file \"{filename}\" does not exist.");return;
             }
             TriangulateFaces();
         }
-        public static void TriangulateFaces()
+        private static void TriangulateFaces()
         {
             List<int> VertexIndices = new List<int>();
             foreach (var face in Faces)
@@ -259,11 +235,12 @@ namespace obj2mdl_batch_converter
         public static void Save(string filename)
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"// Model converted from obj to mdl by OBJ2MDL Batch Converter on {DateTime.Now}");
+            sb.AppendLine($"// Model converted from OBJ to MDL by OBJ2MDL Batch Converter on {DateTime.Now.ToString("dd MMMM yyyy 'at' HH:mm:ss")}");
+
             sb.AppendLine(MDL_Base);
-            sb.AppendLine(Get());
+            sb.AppendLine(Get_MDL_String());
             File.WriteAllText(filename, sb.ToString());
-            Clean();
+            ClearAll();
         }
         private const string MDL_Base = @"
                 Version {
@@ -292,26 +269,26 @@ Bone ""base"" {
 	ObjectId 0,
 	GeosetId 0,
 	GeosetAnimId None,
-}
+    }
 Attachment ""Origin Ref"" {
 	ObjectId 1,
 	AttachmentID 0,
-}
+    }
 PivotPoints 2 {
 	{ 0, 0, 0 },
 	{ 0, 0, 0 },
-}
+    }
 Sequences 2 {
 	Anim ""Stand"" {
 		Interval { 0, 999 },
-}
+    }
 Anim ""Death"" {
 		Interval { 1000, 1999 },
-}
+    }
 }
 "
 ;
-        public static string FormatWithCurlyBraces(string input)
+        private static string FormatWithCurlyBraces(string input)
         {
             if (!string.IsNullOrEmpty(input))
             {
@@ -331,8 +308,51 @@ Anim ""Death"" {
             }
             else
             {
-                throw new ArgumentException("Input string is null or empty.");
+                MessageBox.Show ("Input string is null or empty."); return "";
             }
         }
+
+        public static bool ObjValidator(string filePath)
+        {
+            if (File.Exists(filePath) == false) { return false; }
+            string[] lines = File.ReadAllLines(filePath);
+            Regex vertexRegex = new Regex(@"^v\s-?\d+(\.\d+)?\s-?\d+(\.\d+)?\s-?\d+(\.\d+)?$");
+            Regex vertexTextureRegex = new Regex(@"^vt\s-?\d+(\.\d+)?\s-?\d+(\.\d+)?(\s-?\d+(\.\d+)?)?$");
+            Regex vertexNormalRegex = new Regex(@"^vn\s-?\d+(\.\d+)?\s-?\d+(\.\d+)?\s-?\d+(\.\d+)?$");
+            Regex faceRegex = new Regex(@"^f(\s\d+(/\d*)?(/\d*)?)+$");
+            Regex commentRegex = new Regex(@"^#.*$");
+            Regex objectRegex = new Regex(@"^o\s+\w+$");
+            Regex groupRegex = new Regex(@"^g\s+\w+$");
+            Regex useMaterialRegex = new Regex(@"^usemtl\s+\w+$");
+            Regex smoothShadingRegex = new Regex(@"^s\s+\w+$");
+            Regex materialLibRegex = new Regex(@"^mtllib\s+\w+(\.\w+)?$");
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string line = lines[i].Trim();
+                if (string.IsNullOrEmpty(line) || commentRegex.IsMatch(line))
+                {
+                    continue; // Skip empty lines and comments
+                }
+                else if (vertexRegex.IsMatch(line) || vertexTextureRegex.IsMatch(line) ||
+                         vertexNormalRegex.IsMatch(line) || faceRegex.IsMatch(line) ||
+                         objectRegex.IsMatch(line) || groupRegex.IsMatch(line) ||
+                         useMaterialRegex.IsMatch(line) || smoothShadingRegex.IsMatch(line) ||
+                         materialLibRegex.IsMatch(line))
+                {
+                    continue; // Valid line
+                }
+                else
+                {
+                    // Display message box with invalid line information
+                    MessageBox.Show($"Invalid line detected at line {i + 1}: {line}", "Invalid OBJ File");
+                    return false;
+                }
+            }
+
+            return true; // All lines are valid
+        }
     }
-}
+    }
+    
+  

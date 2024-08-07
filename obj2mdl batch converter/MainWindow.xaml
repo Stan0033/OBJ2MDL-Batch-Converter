@@ -4,5 +4,5 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Title="OBJ2MDL Batch converter" Height="350" Width="350">
-    <Label Name="Man" Height="300" Width="300" HorizontalContentAlignment="Center"  AllowDrop="True" Drop="Man_Drop"  VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="2">Drop obj files here</Label>
+    <Label Name="Man" Height="300" Width="300" HorizontalContentAlignment="Center"  AllowDrop="True" Drop="OnLabel_Drop"  VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="2">Drop obj files here</Label>
 </Window>
