@@ -1,14 +1,28 @@
 This program will convert dropped .obj (wavefront) files onto it, into .mdl (warcraft 3) and put them in the same folder as the source.
 
 Notice:
-1. no matter how much objects you had in your obj file, the outcome will be a single geoset 
-2. do not mess with the .obj file with notepad or similar.
-3. The outputted geoset will be sideways due to differences in how standard 3D coordiantes work and how openGL coordinates work. You can rotate it after however.
-4. 
+   1. The output will always be a single geoset regardless of objects count.
+   2. The output geoset might be sideways and with lower scaling but that can be fixed post-conversion.
+     
 Bonus to converted mdl file:
 - origin ref
 - geoset attached to bone "base", and using material
 - material with layer using texture "Textures\white.blp"
+
+Usage:
+
+This software is free to use for personal and commercial
+purposes, but modification of the source code is not allowed.
+License:
+
+This software is provided "as-is" without any warranty. The
+author is not liable for any damages resulting from its use.
+Redistribution is allowed, provided the software is unmodified.
+
+changelog:
+1.0.1:
+- validating obj file format
+- datetime not using local format anymore
 
 Requires .net 3.5.
 
