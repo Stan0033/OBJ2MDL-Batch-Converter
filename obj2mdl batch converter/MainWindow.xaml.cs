@@ -48,6 +48,8 @@ namespace obj2mdl_batch_converter
     1.0.1:
     - validating obj file format
     - datetime not using local format anymore
+    1.0.2:
+    - added check if vdertices or faces count is 0
      */
     public partial class MainWindow : Window
     {
@@ -92,9 +94,9 @@ namespace obj2mdl_batch_converter
         public static List<string> Normals { get; private set; } = new List<string>();
         public static List<string> TextureCoordinates { get; private set; } = new List<string>();
         public static List<string> Faces { get; private set; } = new List<string>();
-        public static List<int> TriangleVertexIndices { get; private set; }  = new List<int>();
-        public static void ClearAll()  {  Vertices.Clear(); Normals.Clear(); TextureCoordinates.Clear();  Faces.Clear(); TriangleVertexIndices.Clear();}
-        
+        public static List<int> TriangleVertexIndices { get; private set; } = new List<int>();
+        public static void ClearAll() { Vertices.Clear(); Normals.Clear(); TextureCoordinates.Clear(); Faces.Clear(); TriangleVertexIndices.Clear(); }
+
         public static string Get_MDL_String()
         {
             StringBuilder stringBuilder = new StringBuilder();
@@ -177,7 +179,7 @@ namespace obj2mdl_batch_converter
             }
             else
             {
-                MessageBox.Show ($"The specified file \"{filename}\" does not exist.");return;
+                MessageBox.Show($"The specified file \"{filename}\" does not exist."); return;
             }
             TriangulateFaces();
         }
@@ -232,8 +234,15 @@ namespace obj2mdl_batch_converter
                 }
             }
         }
+        private static bool AnyEmpty()
+        {
+            if (Vertices.Count <3   ){ return true; }
+            if (Faces.Count == 0   ){ return true; }
+            return false;
+        }
         public static void Save(string filename)
         {
+            if (AnyEmpty() == true) { return; }
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"// Model converted from OBJ to MDL by OBJ2MDL Batch Converter on {DateTime.Now.ToString("dd MMMM yyyy 'at' HH:mm:ss")}");
 
