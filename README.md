@@ -23,7 +23,8 @@ changelog:
 1.0.1:
 - validating obj file format
 - datetime not using local format anymore
-
+1.0.2:
+  - checking if vertices or faces count is invalid
 Requires .net 3.5.
 
 Single .exe file.
