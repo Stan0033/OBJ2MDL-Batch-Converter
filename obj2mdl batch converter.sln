@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "obj2mdl batch converter", "obj2mdl batch converter\obj2mdl batch converter.csproj", "{A53D160F-9006-4A04-9392-36A307C31188}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBJ2MDL Batch Converter", "obj2mdl batch converter\OBJ2MDL Batch Converter.csproj", "{A53D160F-9006-4A04-9392-36A307C31188}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
