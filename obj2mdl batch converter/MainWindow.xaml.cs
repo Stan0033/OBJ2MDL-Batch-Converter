@@ -93,8 +93,6 @@ namespace obj2mdl_batch_converter
 
         public static void Parse(string filename)
         {
-            if (!File.Exists(filename)) { MessageBox.Show($"The specified file \"{filename}\" does not exist."); return; }
-
             using (StreamReader reader = new StreamReader(filename))
             {
                 string line;
@@ -180,12 +178,12 @@ namespace obj2mdl_batch_converter
             string timestamp = DateTime.Now.ToString("dd MMMM yyyy 'at' HH:mm:ss");
             StringBuilder stringBuilder = new StringBuilder()
             .AppendLine($"// Model converted from OBJ to MDL by OBJ2MDL Batch Converter on {timestamp}")
-            .AppendLine(MDL_Base)
+            .AppendLine(MDL_Template)
             .AppendLine(Get_Geoset_MDL_String());
             File.WriteAllText(filename, stringBuilder.ToString());
             ClearAll();
         }
-        private const string MDL_Base = @"
+        private const string MDL_Template = @"
                 Version {
 	FormatVersion 800,
 }
@@ -253,7 +251,6 @@ Anim ""Death"" {
         //----------------------------------
         private static readonly Regex vertexRegex = new Regex(@"^v\s-?\d+(\.\d+)?([eE][-+]?\d+)?\s-?\d+(\.\d+)?([eE][-+]?\d+)?\s-?\d+(\.\d+)?([eE][-+]?\d+)?$");
         private static readonly Regex vertexNormalRegex = new Regex(@"^vn\s-?\d+(\.\d+)?([eE][-+]?\d+)?\s-?\d+(\.\d+)?([eE][-+]?\d+)?\s-?\d+(\.\d+)?([eE][-+]?\d+)?$");
-
         private static readonly Regex vertexTextureRegex = new Regex(@"^vt\s-?\d+(\.\d+)?\s-?\d+(\.\d+)?(\s-?\d+(\.\d+)?)?$");
         private static readonly Regex faceRegex = new Regex(@"^f(\s\d+(/\d*)?(/\d*)?)+$");
         private static readonly Regex commentRegex = new Regex(@"^#.*$");
