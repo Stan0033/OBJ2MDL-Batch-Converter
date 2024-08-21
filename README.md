@@ -27,7 +27,7 @@ changelog:
 1.0.2:
   - checking if vertices or faces count is invalid
 
-1.0.3
+1.0.3:
     - code optimizations
     - exponent is now recognized as valid by the validator
 
