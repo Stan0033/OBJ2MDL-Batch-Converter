@@ -2,37 +2,31 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.IO;
-using Path = System.IO.Path;
 using System.Text;
 using System.Linq;
 using System.Text.RegularExpressions;
 namespace obj2mdl_batch_converter
 {
-
+    // (C) 2024 stan0033
     public partial class MainWindow : Window
     {
         public MainWindow()
-        {
-            InitializeComponent();
-        }
+        { InitializeComponent(); }
         private void OnLabel_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
                 foreach (string file in files)
                 {
                     if (System.IO.Path.GetExtension(file).ToLower() == ".obj")
                     {
-                        if (ObjFileParser.ObjValidator(file) == false) { continue; }
+                        if (ObjValidator.Validate(file) == false) { continue; }
                         ObjFileParser.Parse(file);
                         string targetPath = Path.Combine(Path.GetDirectoryName(file), $"{Path.GetFileNameWithoutExtension(file)}.mdl");
                         ObjFileParser.Save(targetPath);
-
                     }
                 }
-
             }
         }
     }
@@ -50,31 +44,29 @@ namespace obj2mdl_batch_converter
             stringBuilder
                 .AppendLine("Geoset {")
                 .AppendLine($"\tVertices {Vertices.Count} {{");
-            foreach (string vertex in Vertices) { stringBuilder.AppendLine(FormatWithCurlyBraces(vertex)); }
+            foreach (string vertex in Vertices)  stringBuilder.AppendLine(FormatWithCurlyBraces(vertex)); 
             stringBuilder
                 .AppendLine("}")
                 .AppendLine($"\tNormals {Vertices.Count} {{");
             for (int normalIndex = 0; normalIndex < Vertices.Count; normalIndex++)
             {
-                if (normalIndex < Normals.Count) { stringBuilder.AppendLine(FormatWithCurlyBraces(Normals[normalIndex])); }
-                else
-                {
-                    stringBuilder.AppendLine("{ 0, 0, 0 },");
-                }
+                if (normalIndex < Normals.Count)  stringBuilder.AppendLine(FormatWithCurlyBraces(Normals[normalIndex])); 
+                else  stringBuilder.AppendLine("{ 0, 0, 0 },");
+                 
             }
-            stringBuilder.AppendLine("}").AppendLine($"\tTVertices {Vertices.Count} {{");
+            stringBuilder
+                .AppendLine("}")
+                .AppendLine($"\tTVertices {Vertices.Count} {{");
             for (int tVertexIndex = 0; tVertexIndex < Vertices.Count; tVertexIndex++)
             {
-                if (tVertexIndex < TextureCoordinates.Count) { stringBuilder.AppendLine(FormatWithCurlyBraces(TextureCoordinates[tVertexIndex])); }
-                else
-                {
-                    stringBuilder.AppendLine("{ 0, 0 },");
-                }
+                if (tVertexIndex < TextureCoordinates.Count)  stringBuilder.AppendLine("\t\t"+FormatWithCurlyBraces(TextureCoordinates[tVertexIndex])); 
+                else stringBuilder.AppendLine("\t\t{ 0, 0 },");
+                 
             }
             stringBuilder
             .AppendLine("}")
             .AppendLine($"\tVertexGroup {{");
-            for (int i = 0; i < Vertices.Count; i++) { stringBuilder.AppendLine("0,"); }
+            for (int i = 0; i < Vertices.Count; i++) { stringBuilder.AppendLine("\t\t0,"); }
             stringBuilder
             .AppendLine("}")
             .AppendLine($"\tFaces 1 {TriangleVertexIndices.Count} {{")
@@ -90,7 +82,6 @@ namespace obj2mdl_batch_converter
             .AppendLine("}");
             return stringBuilder.ToString();
         }
-
         public static void Parse(string filename)
         {
             using (StreamReader reader = new StreamReader(filename))
@@ -99,31 +90,18 @@ namespace obj2mdl_batch_converter
                 while ((line = reader.ReadLine()) != null)
                 {
                     line = line.Trim();
-                    if (line.StartsWith("v "))
-                    {
-                        Vertices.Add(line.Substring(2).Trim());
-                    }
-                    else if (line.StartsWith("vn "))
-                    {
-                        Normals.Add(line.Substring(3).Trim());
-                    }
-                    else if (line.StartsWith("vt "))
-                    {
-                        TextureCoordinates.Add(line.Substring(3).Trim());
-                    }
-                    else if (line.StartsWith("f "))
-                    {
-                        Faces.Add(line.Substring(2).Trim());
-                    }
+                    if (line.StartsWith("v ")) Vertices.Add(line.Substring(2).Trim());
+                    else if (line.StartsWith("vn ")) Normals.Add(line.Substring(3).Trim());
+                    else if (line.StartsWith("vt ")) TextureCoordinates.Add(line.Substring(3).Trim());
+                    else if (line.StartsWith("f ")) Faces.Add(line.Substring(2).Trim());
                 }
             }
-
             TriangulateFaces();
         }
         private static void TriangulateFaces()
         {
             List<int> VertexIndices = new List<int>();
-            foreach (var face in Faces)
+            foreach (string face in Faces)
             {
                 string[] faceVertices = face.Split(' ');
                 if (faceVertices.Length == 3)
@@ -183,72 +161,27 @@ namespace obj2mdl_batch_converter
             File.WriteAllText(filename, stringBuilder.ToString());
             ClearAll();
         }
-        private const string MDL_Template = @"
-                Version {
-	FormatVersion 800,
-}
-Model """" {
-	NumBones 1,
-	NumAttachments 1,
-	BlendTime 150,
-}
-Textures 1 {
-	Bitmap {
-		Image ""Textures\white.blp"",
-	}
-}
-Materials 1 {
-	Material {
-		Layer {
-			FilterMode None,
-            TwoSided,
-			static TextureID 0,
-		}
-	}
-}
-Bone ""base"" {
-	ObjectId 0,
-	GeosetId 0,
-	GeosetAnimId None,
-    }
-Attachment ""Origin Ref"" {
-	ObjectId 1,
-	AttachmentID 0,
-    }
-PivotPoints 2 {
-	{ 0, 0, 0 },
-	{ 0, 0, 0 },
-    }
-Sequences 2 {
-	Anim ""Stand"" {
-		Interval { 0, 999 },
-    }
-Anim ""Death"" {
-		Interval { 1000, 1999 },
-    }
-}
-"
-;
-
+        private const string MDL_Template = "Version {\n\tFormatVersion 800,\n}\nModel \"\" {\n\tNumBones 1,\n\tNumAttachments 1,\n\tBlendTime 150,\n}\nTextures 1 {\n\tBitmap {\n\t\tImage \"Textures\\white.blp\",\n\t}\n}\nMaterials 1 {\n\tMaterial {\n\t\tLayer {\n\t\t\tFilterMode None,\n\t\t\tTwoSided,\n\t\t\tstatic TextureID 0,\n\t\t}\n\t}\n}\nBone \"base\" {\n\tObjectId 0,\n\tGeosetId 0,\n\tGeosetAnimId None,\n}\nAttachment \"Origin Ref\" {\n\tObjectId 1,\n\tAttachmentID 0,\n}\nPivotPoints 2 {\n\t{ 0, 0, 0 },\n\t{ 0, 0, 0 },\n}\nSequences 2 {\n\tAnim \"Stand\" {\n\t\tInterval { 0, 999 },\n\t}\n\tAnim \"Death\" {\n\t\tInterval { 1000, 1999 },\n\t}\n}";
         private static string FormatWithCurlyBraces(string input)
         {
             if (string.IsNullOrEmpty(input)) { MessageBox.Show("Input string is null or empty."); return ""; }
             string[] parts = input.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            StringBuilder sb = new StringBuilder();
-            sb.Append("\t\t{ ");
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append("\t\t{ ");
             for (int i = 0; i < parts.Length; i++)
             {
-                sb.Append(parts[i]);
+                stringBuilder.Append(parts[i]);
                 if (i < parts.Length - 1)
                 {
-                    sb.Append(", ");
+                    stringBuilder.Append(", ");
                 }
             }
-            sb.Append(" },");
-            return sb.ToString();
+            stringBuilder.Append(" },");
+            return stringBuilder.ToString();
         }
-        //regexes for validation
-        //----------------------------------
+    }
+    public static class ObjValidator
+    {
         private static readonly Regex vertexRegex = new Regex(@"^v\s-?\d+(\.\d+)?([eE][-+]?\d+)?\s-?\d+(\.\d+)?([eE][-+]?\d+)?\s-?\d+(\.\d+)?([eE][-+]?\d+)?$");
         private static readonly Regex vertexNormalRegex = new Regex(@"^vn\s-?\d+(\.\d+)?([eE][-+]?\d+)?\s-?\d+(\.\d+)?([eE][-+]?\d+)?\s-?\d+(\.\d+)?([eE][-+]?\d+)?$");
         private static readonly Regex vertexTextureRegex = new Regex(@"^vt\s-?\d+(\.\d+)?\s-?\d+(\.\d+)?(\s-?\d+(\.\d+)?)?$");
@@ -259,25 +192,18 @@ Anim ""Death"" {
         private static readonly Regex useMaterialRegex = new Regex(@"^usemtl\s+\w+$");
         private static readonly Regex smoothShadingRegex = new Regex(@"^s\s+\w+$");
         private static readonly Regex materialLibRegex = new Regex(@"^mtllib\s+\w+(\.\w+)?$");
-        //----------------------------------
-        public static bool ObjValidator(string filePath)
+        public static bool Validate(string filePath)
         {
             if (!File.Exists(filePath)) { return false; }
-
             using (StreamReader reader = new StreamReader(filePath))
             {
                 int lineNumber = 0;
                 string line;
-
                 while ((line = reader.ReadLine()) != null)
                 {
                     lineNumber++;
                     line = line.Trim();
-
-                    if (string.IsNullOrEmpty(line) || commentRegex.IsMatch(line))
-                    {
-                        continue; // Skip empty lines and comments
-                    }
+                    if (string.IsNullOrEmpty(line) || commentRegex.IsMatch(line))  continue; // Skip empty lines and comments
                     else if (vertexRegex.IsMatch(line) || vertexTextureRegex.IsMatch(line) ||
                              vertexNormalRegex.IsMatch(line) || faceRegex.IsMatch(line) ||
                              objectRegex.IsMatch(line) || groupRegex.IsMatch(line) ||
@@ -294,9 +220,7 @@ Anim ""Death"" {
                     }
                 }
             }
-
             return true; // All lines are valid
         }
-
     }
 }

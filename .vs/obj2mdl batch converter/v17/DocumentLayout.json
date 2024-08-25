@@ -9,17 +9,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A53D160F-9006-4A04-9392-36A307C31188}|obj2mdl batch converter\\OBJ2MDL Batch Converter.csproj|C:\\Github\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{A53D160F-9006-4A04-9392-36A307C31188}|obj2mdl batch converter\\OBJ2MDL Batch Converter.csproj|solutionrelative:obj2mdl batch converter\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|OBJ2MDL Batch Converter||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A53D160F-9006-4A04-9392-36A307C31188}|obj2mdl batch converter\\obj2mdl batch converter.csproj|C:\\Github\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A53D160F-9006-4A04-9392-36A307C31188}|obj2mdl batch converter\\obj2mdl batch converter.csproj|solutionrelative:obj2mdl batch converter\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A53D160F-9006-4A04-9392-36A307C31188}|obj2mdl batch converter\\obj2mdl batch converter.csproj|C:\\Github\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\cube.ico||{177559E0-D141-11D0-92DF-00A0C9138C45}",
-      "RelativeMoniker": "D:0:0:{A53D160F-9006-4A04-9392-36A307C31188}|obj2mdl batch converter\\obj2mdl batch converter.csproj|solutionrelative:obj2mdl batch converter\\cube.ico||{177559E0-D141-11D0-92DF-00A0C9138C45}"
     }
   ],
   "DocumentGroupContainers": [
@@ -29,42 +18,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "OBJ2MDL Batch Converter",
-              "DocumentMoniker": "C:\\Github\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\OBJ2MDL Batch Converter.csproj",
-              "RelativeDocumentMoniker": "obj2mdl batch converter\\OBJ2MDL Batch Converter.csproj",
-              "ToolTip": "C:\\Github\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\OBJ2MDL Batch Converter.csproj",
-              "RelativeToolTip": "obj2mdl batch converter\\OBJ2MDL Batch Converter.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-08-12T21:17:18.173Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "App.xaml.cs",
-              "DocumentMoniker": "C:\\Github\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\App.xaml.cs",
-              "RelativeDocumentMoniker": "obj2mdl batch converter\\App.xaml.cs",
-              "ToolTip": "C:\\Github\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\App.xaml.cs",
-              "RelativeToolTip": "obj2mdl batch converter\\App.xaml.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T19:52:01.038Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "cube.ico -  [English (United Kingdom)] - Icon [256x256, 32 bit, PNG]",
-              "DocumentMoniker": "C:\\Github\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\cube.ico",
-              "RelativeDocumentMoniker": "obj2mdl batch converter\\cube.ico",
-              "ToolTip": "C:\\Github\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\cube.ico -  [English (United Kingdom)] - Icon [256x256, 32 bit, PNG]",
-              "RelativeToolTip": "obj2mdl batch converter\\cube.ico -  [English (United Kingdom)] - Icon [256x256, 32 bit, PNG]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001525|",
-              "WhenOpened": "2024-07-05T19:51:55.57Z"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -73,7 +28,7 @@
               "RelativeDocumentMoniker": "obj2mdl batch converter\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Github\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\MainWindow.xaml.cs",
               "RelativeToolTip": "obj2mdl batch converter\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAKUAAAAAAAAAAAAiwLIAAAA9AAAA",
+              "ViewState": "AQIAAE0AAAAAAAAAAAAUwAIAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-05T19:51:54.471Z",
               "EditorCaption": ""
