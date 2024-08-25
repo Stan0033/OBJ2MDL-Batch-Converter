@@ -208,7 +208,6 @@ namespace obj2mdl_batch_converter
                     }
                     else
                     {
-                        // Display message box with invalid line information
                         MessageBox.Show($"Invalid line detected at line {lineNumber}: {line}", "Invalid OBJ File");
                         return false;
                     }
