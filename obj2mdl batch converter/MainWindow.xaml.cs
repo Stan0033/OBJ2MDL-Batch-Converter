@@ -164,21 +164,15 @@ namespace obj2mdl_batch_converter
         private const string MDL_Template = "Version {\n\tFormatVersion 800,\n}\nModel \"\" {\n\tNumBones 1,\n\tNumAttachments 1,\n\tBlendTime 150,\n}\nTextures 1 {\n\tBitmap {\n\t\tImage \"Textures\\white.blp\",\n\t}\n}\nMaterials 1 {\n\tMaterial {\n\t\tLayer {\n\t\t\tFilterMode None,\n\t\t\tTwoSided,\n\t\t\tstatic TextureID 0,\n\t\t}\n\t}\n}\nBone \"base\" {\n\tObjectId 0,\n\tGeosetId 0,\n\tGeosetAnimId None,\n}\nAttachment \"Origin Ref\" {\n\tObjectId 1,\n\tAttachmentID 0,\n}\nPivotPoints 2 {\n\t{ 0, 0, 0 },\n\t{ 0, 0, 0 },\n}\nSequences 2 {\n\tAnim \"Stand\" {\n\t\tInterval { 0, 999 },\n\t}\n\tAnim \"Death\" {\n\t\tInterval { 1000, 1999 },\n\t}\n}";
         private static string FormatWithCurlyBraces(string input)
         {
-            if (string.IsNullOrEmpty(input)) { MessageBox.Show("Input string is null or empty."); return ""; }
-            string[] parts = input.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append("\t\t{ ");
-            for (int i = 0; i < parts.Length; i++)
-            {
-                stringBuilder.Append(parts[i]);
-                if (i < parts.Length - 1)
-                {
-                    stringBuilder.Append(", ");
-                }
-            }
-            stringBuilder.Append(" },");
-            return stringBuilder.ToString();
+            if (string.IsNullOrEmpty(input)) return "";
+             var parts = input.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            var stringBuilder = new StringBuilder("\t\t{ ");
+
+            stringBuilder.Append(string.Join(", ", parts))
+             .Append(" },");
+             return stringBuilder.ToString();
         }
+
     }
     public static class ObjValidator
     {
