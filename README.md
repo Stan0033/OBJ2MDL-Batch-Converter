@@ -4,8 +4,7 @@ Notice: If faces have to be triangulates from quads or ngons, the normals are no
      
 Bonus to converted mdl file:
 - origin ref
-- geoset attached to bone "base", and using material
-- material with layer using texture "Textures\white.blp"
+- geoset/s attached to bone/s, and using material with layer using texture "Textures\white.blp"
 
 Usage:
 
