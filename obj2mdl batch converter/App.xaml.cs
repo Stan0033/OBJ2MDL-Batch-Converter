@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-
 namespace obj2mdl_batch_converter
 {
     /// <summary>

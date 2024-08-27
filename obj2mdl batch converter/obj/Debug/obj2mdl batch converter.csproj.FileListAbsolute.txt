@@ -96,3 +96,17 @@ C:\Github\OBJ2MDL-Batch-Converter\obj2mdl batch converter\obj\Debug\obj2mdl batc
 C:\Github\OBJ2MDL-Batch-Converter\obj2mdl batch converter\obj\Debug\obj2mdl batch converter.csproj.CoreCompileInputs.cache
 C:\Github\OBJ2MDL-Batch-Converter\obj2mdl batch converter\obj\Debug\obj2mdl batch converter.exe
 C:\Github\OBJ2MDL-Batch-Converter\obj2mdl batch converter\obj\Debug\obj2mdl batch converter.pdb
+C:\Github\OBJ2MDL-Batch-Converter - Copy\obj2mdl batch converter\obj\Debug\OBJ2MDL Batch Converter.csproj.AssemblyReference.cache
+C:\Github\OBJ2MDL-Batch-Converter - Copy\obj2mdl batch converter\obj\Debug\MainWindow.baml
+C:\Github\OBJ2MDL-Batch-Converter - Copy\obj2mdl batch converter\obj\Debug\MainWindow.g.cs
+C:\Github\OBJ2MDL-Batch-Converter - Copy\obj2mdl batch converter\obj\Debug\App.g.cs
+C:\Github\OBJ2MDL-Batch-Converter - Copy\obj2mdl batch converter\obj\Debug\OBJ2MDL Batch Converter_MarkupCompile.cache
+C:\Github\OBJ2MDL-Batch-Converter - Copy\obj2mdl batch converter\obj\Debug\OBJ2MDL Batch Converter.g.resources
+C:\Github\OBJ2MDL-Batch-Converter - Copy\obj2mdl batch converter\obj\Debug\obj2mdl_batch_converter.Properties.Resources.resources
+C:\Github\OBJ2MDL-Batch-Converter - Copy\obj2mdl batch converter\obj\Debug\OBJ2MDL Batch Converter.csproj.GenerateResource.cache
+C:\Github\OBJ2MDL-Batch-Converter - Copy\obj2mdl batch converter\obj\Debug\OBJ2MDL Batch Converter.csproj.CoreCompileInputs.cache
+C:\Github\OBJ2MDL-Batch-Converter - Copy\obj2mdl batch converter\obj\Debug\OBJ2MDL Batch Converter.exe
+C:\Github\OBJ2MDL-Batch-Converter - Copy\obj2mdl batch converter\obj\Debug\OBJ2MDL Batch Converter.pdb
+C:\Github\OBJ2MDL-Batch-Converter - Copy\obj2mdl batch converter\bin\Debug\OBJ2MDL Batch Converter.exe.config
+C:\Github\OBJ2MDL-Batch-Converter - Copy\obj2mdl batch converter\bin\Debug\OBJ2MDL Batch Converter.exe
+C:\Github\OBJ2MDL-Batch-Converter - Copy\obj2mdl batch converter\bin\Debug\OBJ2MDL Batch Converter.pdb

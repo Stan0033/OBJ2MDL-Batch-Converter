@@ -31,6 +31,10 @@ changelog:
  - code optimizations
  - exponent is now recognized as valid by the validator
 
+1.0.4:
+- you can now choose to generate geoset for each object, bone for each geoset and material for each geoset
+
+
 Requires .net 3.5.
 
 Single .exe file.
