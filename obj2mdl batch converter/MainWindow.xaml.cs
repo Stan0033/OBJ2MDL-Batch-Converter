@@ -1,4 +1,6 @@
-﻿using System;
+﻿original
+
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.IO;
@@ -44,24 +46,24 @@ namespace obj2mdl_batch_converter
             stringBuilder
                 .AppendLine("Geoset {")
                 .AppendLine($"\tVertices {Vertices.Count} {{");
-            foreach (string vertex in Vertices)  stringBuilder.AppendLine(FormatWithCurlyBraces(vertex)); 
+            foreach (string vertex in Vertices) stringBuilder.AppendLine(FormatWithCurlyBraces(vertex));
             stringBuilder
                 .AppendLine("}")
                 .AppendLine($"\tNormals {Vertices.Count} {{");
             for (int normalIndex = 0; normalIndex < Vertices.Count; normalIndex++)
             {
-                if (normalIndex < Normals.Count)  stringBuilder.AppendLine(FormatWithCurlyBraces(Normals[normalIndex])); 
-                else  stringBuilder.AppendLine("{ 0, 0, 0 },");
-                 
+                if (normalIndex < Normals.Count) stringBuilder.AppendLine(FormatWithCurlyBraces(Normals[normalIndex]));
+                else stringBuilder.AppendLine("{ 0, 0, 0 },");
+
             }
             stringBuilder
                 .AppendLine("}")
                 .AppendLine($"\tTVertices {Vertices.Count} {{");
             for (int tVertexIndex = 0; tVertexIndex < Vertices.Count; tVertexIndex++)
             {
-                if (tVertexIndex < TextureCoordinates.Count)  stringBuilder.AppendLine("\t\t"+FormatWithCurlyBraces(TextureCoordinates[tVertexIndex])); 
+                if (tVertexIndex < TextureCoordinates.Count) stringBuilder.AppendLine("\t\t" + FormatWithCurlyBraces(TextureCoordinates[tVertexIndex]));
                 else stringBuilder.AppendLine("\t\t{ 0, 0 },");
-                 
+
             }
             stringBuilder
             .AppendLine("}")
@@ -165,12 +167,12 @@ namespace obj2mdl_batch_converter
         private static string FormatWithCurlyBraces(string input)
         {
             if (string.IsNullOrEmpty(input)) return "";
-             var parts = input.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            var parts = input.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             var stringBuilder = new StringBuilder("\t\t{ ");
 
             stringBuilder.Append(string.Join(", ", parts))
              .Append(" },");
-             return stringBuilder.ToString();
+            return stringBuilder.ToString();
         }
 
     }
@@ -197,7 +199,7 @@ namespace obj2mdl_batch_converter
                 {
                     lineNumber++;
                     line = line.Trim();
-                    if (string.IsNullOrEmpty(line) || commentRegex.IsMatch(line))  continue; // Skip empty lines and comments
+                    if (string.IsNullOrEmpty(line) || commentRegex.IsMatch(line)) continue; // Skip empty lines and comments
                     else if (vertexRegex.IsMatch(line) || vertexTextureRegex.IsMatch(line) ||
                              vertexNormalRegex.IsMatch(line) || faceRegex.IsMatch(line) ||
                              objectRegex.IsMatch(line) || groupRegex.IsMatch(line) ||
