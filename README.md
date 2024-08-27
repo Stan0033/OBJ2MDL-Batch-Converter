@@ -1,8 +1,6 @@
 This program will convert dropped .obj (wavefront) files onto it, into .mdl (warcraft 3) and put them in the same folder as the source.
 
-Notice:
-   1. The output will always be a single geoset regardless of objects count.
-   2. The output geoset might be sideways and with lower scaling but that can be fixed post-conversion.
+Notice: If faces have to be triangulates from quads or ngons, the normals are not recalculated. Recaltulate them post-conversion.
      
 Bonus to converted mdl file:
 - origin ref
