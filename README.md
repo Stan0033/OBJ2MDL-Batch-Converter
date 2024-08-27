@@ -39,4 +39,4 @@ Requires .net 3.5.
 
 Single .exe file.
 
-![alt text](https://i.ibb.co/CBPrxzN/Screenshot-2024-06-18-052810.png)
+![alt text](https://i.ibb.co/qM61dzr/Screenshot-2024-08-27-221956.png)
