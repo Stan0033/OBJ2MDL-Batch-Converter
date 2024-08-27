@@ -3,8 +3,22 @@
   "WorkspaceRootPath": "C:\\Github\\OBJ2MDL-Batch-Converter\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A53D160F-9006-4A04-9392-36A307C31188}|obj2mdl batch converter\\OBJ2MDL Batch Converter.csproj|c:\\github\\obj2mdl-batch-converter\\obj2mdl batch converter\\properties\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A53D160F-9006-4A04-9392-36A307C31188}|obj2mdl batch converter\\OBJ2MDL Batch Converter.csproj|solutionrelative:obj2mdl batch converter\\properties\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A53D160F-9006-4A04-9392-36A307C31188}|obj2mdl batch converter\\OBJ2MDL Batch Converter.csproj|c:\\github\\obj2mdl-batch-converter\\obj2mdl batch converter\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A53D160F-9006-4A04-9392-36A307C31188}|obj2mdl batch converter\\OBJ2MDL Batch Converter.csproj|solutionrelative:obj2mdl batch converter\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|OBJ2MDL Batch Converter||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A53D160F-9006-4A04-9392-36A307C31188}|obj2mdl batch converter\\OBJ2MDL Batch Converter.csproj|c:\\github\\obj2mdl-batch-converter\\obj2mdl batch converter\\objfileparserextended.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A53D160F-9006-4A04-9392-36A307C31188}|obj2mdl batch converter\\OBJ2MDL Batch Converter.csproj|solutionrelative:obj2mdl batch converter\\objfileparserextended.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A53D160F-9006-4A04-9392-36A307C31188}|obj2mdl batch converter\\OBJ2MDL Batch Converter.csproj|c:\\github\\obj2mdl-batch-converter\\obj2mdl batch converter\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,6 +33,44 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "AssemblyInfo.cs",
+              "DocumentMoniker": "C:\\Github\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\Properties\\AssemblyInfo.cs",
+              "RelativeDocumentMoniker": "obj2mdl batch converter\\Properties\\AssemblyInfo.cs",
+              "ToolTip": "C:\\Github\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\Properties\\AssemblyInfo.cs",
+              "RelativeToolTip": "obj2mdl batch converter\\Properties\\AssemblyInfo.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-27T19:57:41.927Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "App.config",
+              "DocumentMoniker": "C:\\Github\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\App.config",
+              "RelativeDocumentMoniker": "obj2mdl batch converter\\App.config",
+              "ToolTip": "C:\\Github\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\App.config",
+              "RelativeToolTip": "obj2mdl batch converter\\App.config",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2024-08-27T19:57:17.617Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OBJ2MDL Batch Converter",
+              "DocumentMoniker": "C:\\Github\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\OBJ2MDL Batch Converter.csproj",
+              "RelativeDocumentMoniker": "obj2mdl batch converter\\OBJ2MDL Batch Converter.csproj",
+              "ToolTip": "C:\\Github\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\OBJ2MDL Batch Converter.csproj",
+              "RelativeToolTip": "obj2mdl batch converter\\OBJ2MDL Batch Converter.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-08-27T19:55:47.077Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "ObjFileParserExtended.cs",
               "DocumentMoniker": "C:\\Github\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\ObjFileParserExtended.cs",
               "RelativeDocumentMoniker": "obj2mdl batch converter\\ObjFileParserExtended.cs",
