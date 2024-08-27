@@ -5,7 +5,8 @@ Notice: If faces have to be triangulates from quads or ngons, the normals are no
 Bonus to converted mdl file:
 - origin ref
 - geoset/s attached to bone/s, and using material with layer using texture "Textures\white.blp"
-
+- stand and death sequence
+  
 Usage:
 
 This software is free to use for personal and commercial
