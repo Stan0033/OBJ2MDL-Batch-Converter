@@ -1,0 +1,29 @@
+description
+obj is one of the simplest human-readable formats for storing a 3d model's geometry (no animations or bones) and is supported by a long list of 3d modelling apps.
+
+Drop .obj files onto the app, and will spit out MDL file on the same location. 
+
+- Single .exe file
+- Requires .NET 3.5 (Windows XP SP2 and later)
+
+Notice:
+- Does not modify the scaling or rotation. Do this post-conversion.
+- if geosets have a bone each, each bone's pivot point is not calculated, it's 0,0,0. You might want to change that post-conversion.
+- Does not recalculate normals after triangulation. They  might look weird if the obj model contained quads or ngons. So recalculate the normals with programs like mdlvis, post-conversion.
+- extents can be recalculated post-conversion
+
+Bonus to converted MDL file:
+- origin ref
+- Stand and Death sequences
+- material/s using texture "Textures\white.blp"
+
+How to test:
+after converting check with sanity test https://viewer.hiveworkshop.com/check/
+code
+click
+ https://github.com/Stan0033/OBJ2MDL-Batch-Converter/blob/main/obj2mdl%20batch%20converter/MainWindow.xaml.cs
+
+
+
+
+ 

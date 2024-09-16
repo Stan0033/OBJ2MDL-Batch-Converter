@@ -7,10 +7,10 @@ namespace obj2mdl_batch_converter
 {
     public static class ObjValidator
     {
-        private static readonly Regex vertexRegex = new Regex(@"^v\s-?\d+(\.\d+)?([eE][-+]?\d+)?\s-?\d+(\.\d+)?([eE][-+]?\d+)?\s-?\d+(\.\d+)?([eE][-+]?\d+)?$");
-        private static readonly Regex vertexNormalRegex = new Regex(@"^vn\s-?\d+(\.\d+)?([eE][-+]?\d+)?\s-?\d+(\.\d+)?([eE][-+]?\d+)?\s-?\d+(\.\d+)?([eE][-+]?\d+)?$");
+        private static readonly Regex vertexRegex = new Regex(@"^v\s([+-]?(\d*\.\d+|\d+\.?\d*)([eE][+-]?\d+)?)\s([+-]?(\d*\.\d+|\d+\.?\d*)([eE][+-]?\d+)?)\s([+-]?(\d*\.\d+|\d+\.?\d*)([eE][+-]?\d+)?)$");
+        private static readonly Regex vertexNormalRegex = new Regex(@"^vn\s([+-]?(\d*\.\d+|\d+\.?\d*)([eE][+-]?\d+)?)\s([+-]?(\d*\.\d+|\d+\.?\d*)([eE][+-]?\d+)?)\s([+-]?(\d*\.\d+|\d+\.?\d*)([eE][+-]?\d+)?)$");
         private static readonly Regex vertexTextureRegex = new Regex(@"^vt\s-?\d+(\.\d+)?\s-?\d+(\.\d+)?(\s-?\d+(\.\d+)?)?$");
-        private static readonly Regex faceRegex = new Regex(@"^f(\s\d+(/\d*)?(/\d*)?)+$");
+        private static readonly Regex faceRegex = new Regex(@"^f\s+(\d+)(?:\/(\d*))?(?:\/(\d*))?(?:\s+(\d+)(?:\/(\d*))?(?:\/(\d*))?)*$");
         private static readonly Regex commentRegex = new Regex(@"^#.*$");
         private static readonly Regex objectRegex = new Regex(@"^o\s+\w+$");
         private static readonly Regex groupRegex = new Regex(@"^g\s+\w+$");

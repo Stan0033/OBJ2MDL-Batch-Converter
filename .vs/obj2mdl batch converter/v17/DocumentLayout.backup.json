@@ -11,7 +11,7 @@
       "RelativeMoniker": "D:0:0:{A53D160F-9006-4A04-9392-36A307C31188}|obj2mdl batch converter\\OBJ2MDL Batch Converter.csproj|solutionrelative:obj2mdl batch converter\\objvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A53D160F-9006-4A04-9392-36A307C31188}|obj2mdl batch converter\\OBJ2MDL Batch Converter.csproj|C:\\Github\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A53D160F-9006-4A04-9392-36A307C31188}|obj2mdl batch converter\\OBJ2MDL Batch Converter.csproj|c:\\github\\obj2mdl-batch-converter\\obj2mdl batch converter\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A53D160F-9006-4A04-9392-36A307C31188}|obj2mdl batch converter\\OBJ2MDL Batch Converter.csproj|solutionrelative:obj2mdl batch converter\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -55,7 +55,8 @@
               "RelativeToolTip": "obj2mdl batch converter\\MainWindow.xaml.cs",
               "ViewState": "AgIAABsAAAAAAAAAAAAYwBoAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-16T05:07:07.744Z"
+              "WhenOpened": "2024-09-16T05:07:07.744Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -67,7 +68,8 @@
               "RelativeToolTip": "obj2mdl batch converter\\ObjFileParser.cs",
               "ViewState": "AgIAAB8AAAAAAAAAAAAwwAgAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-16T05:06:55.277Z"
+              "WhenOpened": "2024-09-16T05:06:55.277Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -79,7 +81,8 @@
               "RelativeToolTip": "obj2mdl batch converter\\ObjValidator.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAiwAUAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-16T03:34:23.608Z"
+              "WhenOpened": "2024-09-16T03:34:23.608Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -90,7 +93,8 @@
               "ToolTip": "C:\\Github\\OBJ2MDL-Batch-Converter\\obj2mdl batch converter\\MainWindow.xaml",
               "RelativeToolTip": "obj2mdl batch converter\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-09-11T10:51:16.131Z"
+              "WhenOpened": "2024-09-11T10:51:16.131Z",
+              "EditorCaption": ""
             }
           ]
         }
