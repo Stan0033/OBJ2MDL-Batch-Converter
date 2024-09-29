@@ -12,11 +12,14 @@ namespace obj2mdl_batch_converter
         private static readonly Regex vertexTextureRegex = new Regex(@"^vt\s-?\d+(\.\d+)?\s-?\d+(\.\d+)?(\s-?\d+(\.\d+)?)?$");
         private static readonly Regex faceRegex = new Regex(@"^f\s+(\d+)(?:\/(\d*))?(?:\/(\d*))?(?:\s+(\d+)(?:\/(\d*))?(?:\/(\d*))?)*$");
         private static readonly Regex commentRegex = new Regex(@"^#.*$");
-        private static readonly Regex objectRegex = new Regex(@"^o\s+\w+$");
+        private static readonly Regex objectRegex = new Regex(@"^o\s+.+$");
+        private static readonly Regex lineRegex = new Regex(@"^l\s+\d+(\s+\d+)+$");
+
         private static readonly Regex groupRegex = new Regex(@"^g\s+\w+$");
         private static readonly Regex useMaterialRegex = new Regex(@"^usemtl\s+\w+$");
         private static readonly Regex smoothShadingRegex = new Regex(@"^s\s+\w+$");
-        private static readonly Regex materialLibRegex = new Regex(@"^mtllib\s+\w+(\.\w+)?$");
+        private static readonly Regex materialLibRegex = new Regex(@"^mtllib\s+\w+\.mtl$");
+
         public static bool Validate(string filePath)
         {
             if (!File.Exists(filePath)) { return false; }
@@ -32,7 +35,9 @@ namespace obj2mdl_batch_converter
                     else if (vertexRegex.IsMatch(line) || vertexTextureRegex.IsMatch(line) ||
                              vertexNormalRegex.IsMatch(line) || faceRegex.IsMatch(line) ||
                              objectRegex.IsMatch(line) || groupRegex.IsMatch(line) ||
-                             useMaterialRegex.IsMatch(line) || smoothShadingRegex.IsMatch(line) ||
+                             useMaterialRegex.IsMatch(line) || 
+                             smoothShadingRegex.IsMatch(line) ||
+                             lineRegex.IsMatch(line) ||
                              materialLibRegex.IsMatch(line))
                     {
                         continue; // Valid line
@@ -48,4 +53,5 @@ namespace obj2mdl_batch_converter
         }
         private static void Downsize(List<int> list) { int lowest = list.Min(); for (int i = 0; i < list.Count; i++) list[i] -= lowest; }
     }
+
 }
