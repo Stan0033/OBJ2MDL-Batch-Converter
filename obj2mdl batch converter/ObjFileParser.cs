@@ -22,7 +22,7 @@ namespace obj2mdl_batch_converter
                 .AppendLine($"\tVertices {Vertices.Count} {{");
             foreach (string vertex in Vertices) stringBuilder.AppendLine(FormatWithCurlyBraces(vertex));
             stringBuilder
-                .AppendLine("}")
+                .AppendLine("\t}")
                 .AppendLine($"\tNormals {Vertices.Count} {{");
             for (int normalIndex = 0; normalIndex < Vertices.Count; normalIndex++)
             {
@@ -30,7 +30,7 @@ namespace obj2mdl_batch_converter
                 else stringBuilder.AppendLine("{ 0, 0, 0 },");
             }
             stringBuilder
-                .AppendLine("}")
+                .AppendLine("\t}")
                 .AppendLine($"\tTVertices {Vertices.Count} {{");
             for (int tVertexIndex = 0; tVertexIndex < Vertices.Count; tVertexIndex++)
             {
@@ -38,16 +38,16 @@ namespace obj2mdl_batch_converter
                 else stringBuilder.AppendLine("\t\t{ 0, 0 },");
             }
             stringBuilder
-            .AppendLine("}")
+            .AppendLine("\t}")
             .AppendLine($"\tVertexGroup {{");
             for (int i = 0; i < Vertices.Count; i++) { stringBuilder.AppendLine("\t\t0,"); }
             stringBuilder
-            .AppendLine("}")
+            .AppendLine("\t}")
             .AppendLine($"\tFaces 1 {TriangleVertexIndices.Count} {{")
             .AppendLine($"\t\tTriangles {{")
-            .AppendLine($"{{")
-            .AppendLine(string.Join(", ", TriangleVertexIndices.ConvertAll(i => i.ToString()).ToArray()))
-            .AppendLine($"}},\r\n\t\t}}\r\n\t}}\r\n")
+            .AppendLine($"\t\t{{")
+            .AppendLine("\t\t\t"+ string.Join(", ", TriangleVertexIndices.ConvertAll(i => i.ToString()).ToArray()))
+            .AppendLine($"\t}},\r\n\t\t}}\r\n\t}}\r\n")
             .AppendLine("\t" + @"Groups 1 1 {
 		Matrices { 0 },
 	}")
@@ -124,18 +124,20 @@ namespace obj2mdl_batch_converter
             }
         }
         private static bool AnyEmpty() { if (Vertices.Count < 3 || Faces.Count == 0) { return true; } return false; }
+     
         public static void Save(string filename)
         {
             if (AnyEmpty() == true) { MessageBox.Show($"Insufficient geometry at {filename}"); return; }
-            string timestamp = DateTime.Now.ToString("dd MMMM yyyy 'at' HH:mm:ss");
+             
             StringBuilder stringBuilder = new StringBuilder()
-            .AppendLine($"// Model converted from OBJ to MDL by OBJ2MDL Batch Converter on {timestamp}")
+            .AppendLine($"// Model converted from OBJ to MDL by {ProgramInfo.Name} v{ProgramInfo.Version} on {ProgramInfo.GetTime()}")
             .AppendLine(MDL_Template)
             .AppendLine(Get_Geoset_MDL_String());
             File.WriteAllText(filename, stringBuilder.ToString());
             ClearAll();
         }
-        private const string MDL_Template = "Version {\n\tFormatVersion 800,\n}\nModel \"\" {\n\tNumBones 1,\n\tNumAttachments 1,\n\tBlendTime 150,\n}\nTextures 1 {\n\tBitmap {\n\t\tImage \"Textures\\white.blp\",\n\t}\n}\nMaterials 1 {\n\tMaterial {\n\t\tLayer {\n\t\t\tFilterMode None,\n\t\t\tTwoSided,\n\t\t\tstatic TextureID 0,\n\t\t}\n\t}\n}\nBone \"base\" {\n\tObjectId 0,\n\tGeosetId 0,\n\tGeosetAnimId None,\n}\nAttachment \"Origin Ref\" {\n\tObjectId 1,\n\tAttachmentID 0,\n}\nPivotPoints 2 {\n\t{ 0, 0, 0 },\n\t{ 0, 0, 0 },\n}\nSequences 2 {\n\tAnim \"Stand\" {\n\t\tInterval { 0, 999 },\n\t}\n\tAnim \"Death\" {\n\t\tInterval { 1000, 1999 },\n\t}\n}";
+        
+        private const string MDL_Template = "Version {\n\tFormatVersion 800,\n}\nModel \"\" {\n\tNumBones 1,\n\tNumGeosets 1,\n\tNumAttachments 1,\n\tBlendTime 150,\n}\nTextures 1 {\n\tBitmap {\n\t\tImage \"Textures\\white.blp\",\n\t}\n}\nMaterials 1 {\n\tMaterial {\n\t\tLayer {\n\t\t\tFilterMode None,\n\t\t\tstatic TextureID 0,\n\t\t\tTwoSided,\n\t\t}\n\t}\n}\nBone \"base\" {\n\tObjectId 0,\n\tGeosetId 0,\n\tGeosetAnimId None,\n}\nAttachment \"Origin Ref\" {\n\tObjectId 1,\n\tAttachmentID 0,\n}\nPivotPoints 2 {\n\t{ 0, 0, 0 },\n\t{ 0, 0, 0 },\n}\nSequences 2 {\n\tAnim \"Stand\" {\n\t\tInterval { 0, 999 },\n\t}\n\tAnim \"Death\" {\n\t\tInterval { 1000, 1999 },\n\t}\n}";
         private static string FormatWithCurlyBraces(string input)
         {
             if (string.IsNullOrEmpty(input)) return "";

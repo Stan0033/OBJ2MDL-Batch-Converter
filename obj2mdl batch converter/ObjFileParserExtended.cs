@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
- 
+using System.Reflection;
 using System.Text;
 using System.Windows;
 namespace obj2mdl_batch_converter
@@ -43,8 +43,8 @@ namespace obj2mdl_batch_converter
                 .AppendLine("}")
                 .AppendLine($"\tFaces 1 {obj.TriangleVertexIndices.Count} {{")
                 .AppendLine($"\t\tTriangles {{")
-                .AppendLine($"{{")
-                .AppendLine(string.Join(", ", obj.TriangleVertexIndices.ConvertAll(i => i.ToString()).ToArray()))
+                .AppendLine($"\t\t{{")
+                .AppendLine("\t\t\t"+string.Join(", ", obj.TriangleVertexIndices.ConvertAll(i => i.ToString()).ToArray()))
                 .AppendLine($"}},\r\n\t\t}}\r\n\t}}\r\n");
                 int matrix = 0;
                 if (bone)  matrix = count;
@@ -188,12 +188,14 @@ namespace obj2mdl_batch_converter
         }
         public static void Save(string filename, bool bones, bool mats)
         {
+            string geosets =  "NumGeosets "+ Objects.Count.ToString();
+            string bonesCountString = bones ? "NumBones 1" : "NumBones "+ Objects.Count.ToString();
+            string name = Path.GetFileName(filename);
             int empty = AnyEmpty();
            if (empty >= 0) { MessageBox.Show($"Insufficient geometry at object {empty} at \"{filename}\""); return; }
-            string timestamp = DateTime.Now.ToString("dd MMMM yyyy 'at' HH:mm:ss");
-            StringBuilder stringBuilder = new StringBuilder()
-            .AppendLine($"// Model converted from OBJ to MDL by OBJ2MDL Batch Converter on {timestamp}")
-            .AppendLine($"Version {{\n\tFormatVersion 800,\n}}\nModel \"{filename}\" {{\n\tNumBones 1,\n\tNumAttachments 1,\n\tBlendTime 150,\n}}\nTextures 1 {{\n\tBitmap {{\n\t\tImage \"Textures\\white.blp\",\n\t}}\n}}\nSequences 2 {{\n\tAnim \"Stand\" {{\n\t\tInterval {{ 0, 999 }},\n\t}}\n\tAnim \"Death\" {{\n\t\tInterval {{ 1000, 1999 }},\n\t}}\n}}\n")
+           StringBuilder stringBuilder = new StringBuilder()
+            .AppendLine($"// Model converted from OBJ to MDL by {ProgramInfo.Name} v{ProgramInfo.Version} on {ProgramInfo.GetTime()}")
+            .AppendLine($"Version {{\n\tFormatVersion 800,\n}}\nModel \"{name}\" {{\n\t{bonesCountString},\n\t{geosets},\n\tNumAttachments 1,\n\tBlendTime 150,\n}}\nTextures 1 {{\n\tBitmap {{\n\t\tImage \"Textures\\white.blp\",\n\t}}\n}}\nSequences 2 {{\n\tAnim \"Stand\" {{\n\t\tInterval {{ 0, 999 }},\n\t}}\n\tAnim \"Death\" {{\n\t\tInterval {{ 1000, 1999 }},\n\t}}\n}}\n")
             .AppendLine(Get_Geosets_MDL_String(bones,mats));
             if (mats) stringBuilder.AppendLine(GetMaterials_MDL())  ;
             else stringBuilder.AppendLine(GetMaterials_MDL(true));
