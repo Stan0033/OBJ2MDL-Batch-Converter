@@ -18,7 +18,7 @@ namespace obj2mdl_batch_converter
         private static readonly Regex groupRegex = new Regex(@"^g\s+\w+$");
         private static readonly Regex useMaterialRegex = new Regex(@"^usemtl\s+\w+$");
         private static readonly Regex smoothShadingRegex = new Regex(@"^s\s+\w+$");
-        private static readonly Regex materialLibRegex = new Regex(@"^mtllib\s+\w+\.mtl$");
+        private static readonly Regex materialLibRegex = new Regex(@"^mtllib\b");
 
         public static bool Validate(string filePath)
         {
@@ -31,6 +31,7 @@ namespace obj2mdl_batch_converter
                 {
                     lineNumber++;
                     line = line.Trim();
+                    if (line.Length == 0) { continue; }
                     if (string.IsNullOrEmpty(line) || commentRegex.IsMatch(line)) continue; // Skip empty lines and comments
                     else if (vertexRegex.IsMatch(line) || vertexTextureRegex.IsMatch(line) ||
                              vertexNormalRegex.IsMatch(line) || faceRegex.IsMatch(line) ||

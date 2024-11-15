@@ -1,13 +1,14 @@
 ﻿using System.Windows;
 using System.IO;
 using System;
+using Microsoft.Win32;
 namespace obj2mdl_batch_converter
 {
     // (C) 2024 stan0033
 
-    static class ProgramInfo 
+    static class ProgramInfo
     {
-        public static string Version = "1.0.7";
+        public static string Version = "1.0.8";
         public static string Name = "OBJ2MDL Batch Converter";
         public static string GetTime()
         {
@@ -35,33 +36,49 @@ namespace obj2mdl_batch_converter
     {
 
         public MainWindow()
-        { InitializeComponent();
+        {
+            InitializeComponent();
             Title = $"{ProgramInfo.Name} v{ProgramInfo.Version}";
         }
         private void OnLabel_Drop(object sender, DragEventArgs e)
         {
-            bool MultipleGeosets = this.MultipleGeosets.IsChecked == true;
-            bool MutlipleBones = MultipleBones.IsChecked == true;
-            bool MultipleMats = MultipleMaterials.IsChecked == true;
+
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                foreach (string file in files)
+                HandleFiles(files);
+            }
+        }
+        private void HandleFiles(string[] files)
+        {
+            bool MultipleGeosets = this.MultipleGeosets.IsChecked == true;
+            bool MutlipleBones = MultipleBones.IsChecked == true;
+            bool MultipleMats = MultipleMaterials.IsChecked == true;
+            foreach (string file in files)
+            {
+                if (System.IO.Path.GetExtension(file).ToLower() == ".obj")
                 {
-                    if (System.IO.Path.GetExtension(file).ToLower() == ".obj")
+                    if (ObjValidator.Validate(file) == false) { continue; }
+                    string targetPath = Path.Combine(Path.GetDirectoryName(file), $"{Path.GetFileNameWithoutExtension(file)}.mdl");
+                    if (File.Exists(targetPath))
                     {
-                        if (ObjValidator.Validate(file) == false) { continue; }
-                        string targetPath = Path.Combine(Path.GetDirectoryName(file), $"{Path.GetFileNameWithoutExtension(file)}.mdl");
-                        if (MultipleGeosets == false)
+                        MessageBoxResult result = MessageBox.Show($"{file} already exists. Overwrite?", "Existing file", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                        if (result == MessageBoxResult.No)
                         {
-                            ObjFileParser.Parse(file);
-                           ObjFileParser.Save(targetPath);
+                            continue;
                         }
-                        else
-                        {
-                            ObjFileParserExtended.Parse(file, MutlipleBones, MultipleMats);
-                            ObjFileParserExtended.Save(targetPath, MutlipleBones, MultipleMats);
-                        }
+
+                    }
+                    if (MultipleGeosets == false)
+                    {
+                        ObjFileParser.Parse(file);
+                        ObjFileParser.Save(targetPath);
+                    }
+                    else
+                    {
+                        ObjFileParserExtended.Parse(file, MutlipleBones, MultipleMats);
+                        ObjFileParserExtended.Save(targetPath, MutlipleBones, MultipleMats);
                     }
                 }
             }
@@ -73,5 +90,29 @@ namespace obj2mdl_batch_converter
             if (MultipleGeosets.IsChecked == false) { MultipleBones.IsChecked = false; }
             if (MultipleGeosets.IsChecked == false) { MultipleMaterials.IsChecked = false; }
         }
+
+        private void SelectFiles(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // Create an instance of OpenFileDialog
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Multiselect = true, // Allow selecting multiple files
+                Filter = "OBJ Files (*.obj)|*.obj" // Restrict to .obj files
+            };
+
+            // Show the dialog and process the result
+            if (openFileDialog.ShowDialog() == true)
+            {
+                // Get the selected file paths
+                string[] selectedFiles = openFileDialog.FileNames;
+
+                // Handle the selected files
+                foreach (var file in selectedFiles)
+                {
+
+                }
+            }
+        }
     }
 }
+        

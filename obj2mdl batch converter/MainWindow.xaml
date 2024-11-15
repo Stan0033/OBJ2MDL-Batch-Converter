@@ -5,7 +5,7 @@
         WindowStartupLocation="CenterScreen"
         Title="OBJ2MDL Batch Converter" Height="400" Width="355">
     <StackPanel>
-        <Label Name="Man" Height="300" Width="300" Margin="5" HorizontalContentAlignment="Center"  AllowDrop="True" Drop="OnLabel_Drop"  VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="2">Drop obj files here</Label>
+        <Label Name="Man" Height="300" Width="300" Margin="5" MouseDown="SelectFiles" HorizontalContentAlignment="Center"  AllowDrop="True" Drop="OnLabel_Drop"  VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="2">Drop obj files here</Label>
         <StackPanel HorizontalAlignment="Center" Margin="5">
             <CheckBox Name="MultipleGeosets" Checked="Checked_Geoseta" Unchecked="Checked_Geoseta">One geoset for each object</CheckBox>
             <CheckBox Name="MultipleBones" Margin="15,0,0,0" IsEnabled="False">One bone for each geoset</CheckBox>
