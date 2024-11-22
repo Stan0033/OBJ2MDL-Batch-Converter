@@ -8,7 +8,7 @@ namespace obj2mdl_batch_converter
 
     static class ProgramInfo
     {
-        public static string Version = "1.0.8";
+        public static string Version = "1.0.9";
         public static string Name = "OBJ2MDL Batch Converter";
         public static string GetTime()
         {
@@ -39,6 +39,13 @@ namespace obj2mdl_batch_converter
         {
             InitializeComponent();
             Title = $"{ProgramInfo.Name} v{ProgramInfo.Version}";
+        }
+        public MainWindow(string[] args)
+        {
+            InitializeComponent();
+            Title = $"{ProgramInfo.Name} v{ProgramInfo.Version}";
+            HandleFiles(args);
+            Environment.Exit(0);
         }
         private void OnLabel_Drop(object sender, DragEventArgs e)
         {
@@ -105,12 +112,7 @@ namespace obj2mdl_batch_converter
             {
                 // Get the selected file paths
                 string[] selectedFiles = openFileDialog.FileNames;
-
-                // Handle the selected files
-                foreach (var file in selectedFiles)
-                {
-
-                }
+                HandleFiles(selectedFiles);
             }
         }
     }
